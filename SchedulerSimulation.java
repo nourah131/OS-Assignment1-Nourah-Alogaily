@@ -147,8 +147,10 @@ class Process implements Runnable {
 }
 
 public class SchedulerSimulation {
+    private static int contextSwitchCount = 0; // 2 Feature
+// Counted total context switches during process execution
     public static void main(String[] args) {
-        // ⚠️ IMPORTANT: Put your student ID here to seed the random number generator
+        // ⚠️ IMPORTANT: Put your student ID here to seed the random n umber generator
         // This makes your output unique to you - DO NOT forget to change this!
         int studentID = 445052170;  // ← CHANGE THIS TO YOUR ACTUAL STUDENT ID
         
@@ -238,7 +240,7 @@ public class SchedulerSimulation {
             }
             System.out.println(Colors.BRIGHT_WHITE + "]" + Colors.RESET);
             System.out.println(Colors.BOLD + Colors.MAGENTA + "└" + "─".repeat(79) + Colors.RESET + "\n");
-            
+            contextSwitchCount++;
             // Start the thread, which will run the process for one time quantum
             currentThread.start();
             
@@ -267,7 +269,6 @@ public class SchedulerSimulation {
                 }
             }
         }
-        
         // End of the scheduler simulation
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╔════════════════════════════════════════════════════════════════════════════════╗" + 
@@ -279,6 +280,8 @@ public class SchedulerSimulation {
         System.out.println(Colors.BOLD + Colors.BRIGHT_GREEN + 
                           "╚════════════════════════════════════════════════════════════════════════════════╝" + 
                           Colors.RESET + "\n");
+      System.out.println(Colors.BRIGHT_YELLOW + "Total context switches: " + contextSwitchCount + Colors.RESET);
+
     }
     
     // Method to add a process to the queue and map, while printing a "ready" message
@@ -299,5 +302,6 @@ public class SchedulerSimulation {
                   " (Priority: " + Colors.BRIGHT_YELLOW + process.getPriority() + Colors.RESET + ")" +
                   " │ Burst time: " + Colors.YELLOW + process.getBurstTime() + "ms" + 
                   Colors.RESET);
+
     }
 }
